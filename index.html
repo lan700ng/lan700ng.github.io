@@ -59,31 +59,41 @@
         }
         
         .title {
-            -webkit-tap-highlight-color: transparent;
             font-size: 4rem;
             font-weight: 800;
             margin-bottom: 1rem;
             opacity: 0;
-            animation: fadeIn 1s forwards;
+            animation: fadeIn 1s forwards,                       /* appear once */
+               gradientSlow 4s linear infinite;        /* slow move */
             position: relative;
             display: inline-block;
             cursor: pointer;
-            transition: filter 0.3s ease;
+            transform: scale(1);                                /* normal size */
+            transition: transform .35s cubic-bezier(.25,.8,.25,1); /* smooth grow/shrink */
             -webkit-text-stroke: 3px transparent;
-            background: linear-gradient(90deg, var(--ctp-rosewater), var(--ctp-flamingo), var(--ctp-pink), var(--ctp-mauve), var(--ctp-rosewater));
+            background: linear-gradient(90deg,
+                                var(--ctp-rosewater),
+                                var(--ctp-flamingo),
+                                var(--ctp-pink),
+                                var(--ctp-mauve),
+                                var(--ctp-rosewater));
             -webkit-background-clip: text;
+            -webkit-tap-highlight-color: transparent;
             background-clip: text;
             color: transparent;
             background-size: 200% auto;
-            animation: fadeIn 1s forwards, gradientMove 3s linear infinite;
         }
         
         .title:hover {
-            filter: blur(10px);
+            animation: fadeIn 0.3s forwards,
+               gradientFast 1s linear infinite;        /* speed ×3 */
+            transform: scale(1.10);                             /* gentle pop */
         }
         
         .title:active {
-            filter: blur(10px);
+            animation: fadeIn 0.3s forwards,
+               gradientFast 1s linear infinite;        /* speed ×3 */
+            transform: scale(1.10);                             /* gentle pop */
         }
         
         .desc {
@@ -120,18 +130,15 @@
         }
         
         @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
+        to { opacity: 1; }
         }
-        
-        @keyframes gradientMove {
-            0% {
-                background-position: 0% center;
-            }
-            100% {
-                background-position: -200% center;
-            }
+        @keyframes gradientSlow {
+            0%  { background-position: 0% center; }
+            100%{ background-position: -200% center; }
+        }
+        @keyframes gradientFast {
+            0%  { background-position: 0% center; }
+            100%{ background-position: -200% center; }
         }
     </style>
 </head>
